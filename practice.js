@@ -100,37 +100,41 @@ var applyCoupon = function (groceries, coupon) {
  *
  */
 
-// return the total price of all products.
 var sumTotal = function (products) {
-
+  return _.reduce(products, function(total, product) {
+    return total += parseFloat(product.price.slice(1));
+  }, 0);
 };
 
-// return an object consisting of dessert types and how many of each.
-// exampleOutput: { dessertType: 3, dessertType2: 1 }
 var dessertCategories = function (desserts) {
-
+  return _.reduce(desserts, function(result, dessert) {
+    if (result[dessert.type]) {
+      result[dessert.type]++;
+    } else {
+      result[dessert.type] = 1;
+    }
+    return result;
+  }, {});
 };
 
-// return an object with the proper count of all user messages
-/*
- example output:
-  var tweetCountPerUser = countMessagesPerUser(tweets);
-  {
-    "douglascalhoun": 5,
-    "mracus": 6,
-    "shawndrost": 5,
-    "sharksforcheap": 3
-  }
-*/
 var countMessagesPerUser = function(tweets) {
-
+  return _.reduce(tweets, function(totals, tweet) {
+    if (totals[tweet.user]) {
+      totals[tweet.user]++;
+    } else {
+      totals[tweet.user] = 1;
+    }
+    return totals;
+  }, {});
 };
 
-// given an array of movie data objects,return an array containing
-// movies that came out between 1990 and 2000.
-// TIP: use an array as your accumulator - don't push to an external array!
 var ninetiesKid = function (movies) {
-
+  return _.reduce(movies, function (movies, movie) {
+    if (movie.releaseYear >= 1990 && movie.releaseYear <= 2000) {
+      movies.push(movie.title);
+    }
+    return movies;
+  }, []);
 };
 
 // return an boolean stating if there exists a movie with a shorter
