@@ -137,9 +137,8 @@ var ninetiesKid = function (movies) {
   }, []);
 };
 
-// return an boolean stating if there exists a movie with a shorter
-// runtime than your time limit.
-// timeLimit is an integer representing a number of minutes.
 var movieNight = function (movies, timeLimit) {
-
+  return _.reduce(movies, function(result, movie) {
+    return result || (movie.runtime < timeLimit);
+  }, false);
 };
